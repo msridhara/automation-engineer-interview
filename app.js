@@ -49,7 +49,8 @@ document.querySelectorAll('.copy').forEach((button) => {
 const timerDisplay = document.querySelector('#timerDisplay');
 const timerStart = document.querySelector('#timerStart');
 const timerReset = document.querySelector('#timerReset');
-let seconds = 20 * 60;
+const timerDuration = 7 * 60;
+let seconds = timerDuration;
 let intervalId;
 
 function renderTime() {
@@ -83,7 +84,7 @@ timerStart.addEventListener('click', () => {
 timerReset.addEventListener('click', () => {
   clearInterval(intervalId);
   intervalId = undefined;
-  seconds = 20 * 60;
+  seconds = timerDuration;
   timerStart.textContent = 'Start';
   timerDisplay.removeAttribute('aria-label');
   renderTime();
@@ -104,5 +105,5 @@ if (localStorage.getItem('interview-theme') === 'light') {
 
 document.querySelector('#printButton').addEventListener('click', () => window.print());
 
-const initialTask = window.location.hash.match(/^#task-([1-5])$/)?.[1] || '1';
+const initialTask = window.location.hash.match(/^#task-([1-6])$/)?.[1] || '1';
 selectTask(initialTask);

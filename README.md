@@ -1,12 +1,12 @@
-# Senior Test Automation Engineer Interview
+# Test Automation Quick Interview
 
-A static, shareable live interview for a senior Java, Selenium, and REST Assured test automation candidate.
+A static, shareable Java, Selenium, and REST Assured live coding interview.
 
 ## Interview format
 
-- Recommended duration: 90 minutes
+- Recommended duration: 30 minutes
 - Candidate shares their screen and explains decisions
-- Select two or three coding/refactoring tasks plus the architecture discussion
-- Focus on reasoning, maintainability, reliability, and engineering trade-offs
+- Select three or four short questions
+- Each question is designed for 5–10 minutes
 
-The deployed site intentionally contains no solutions or scoring rubric.
+The deployed site intentionally contains questions only and no solutions.

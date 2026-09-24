@@ -47,6 +47,8 @@ button { cursor: pointer; }
     radial-gradient(circle at 78% 35%, rgb(184 242 75 / 13%), transparent 25%),
     linear-gradient(135deg, #111713 0%, #19251d 100%);
 }
+.compact-hero { min-height: 520px; }
+.compact-hero .hero-content { padding-block: 70px 90px; }
 .hero::after {
   position: absolute;
   inset: 0;
@@ -107,6 +109,7 @@ h4 { margin-top: 32px; margin-bottom: 10px; font-size: 15px; letter-spacing: .04
 #timerDisplay { min-width: 86px; padding-inline: 10px; font-family: "DM Mono", monospace; font-size: 20px; font-weight: 500; }
 .timer-action { color: var(--ink); border: 0; border-left: 1px solid var(--line); padding: 8px 12px; background: transparent; font-size: 13px; font-weight: 700; }
 .tabs { display: grid; grid-template-columns: repeat(5, 1fr); margin-top: 34px; border: 1px solid var(--line); }
+.tabs.six-tabs { grid-template-columns: repeat(6, 1fr); }
 .tabs button { display: flex; gap: 11px; justify-content: center; color: var(--muted); border: 0; border-right: 1px solid var(--line); padding: 16px 10px; background: var(--surface); font-weight: 700; }
 .tabs button:last-child { border-right: 0; }
 .tabs button[aria-selected="true"] { color: #101513; background: var(--accent); }

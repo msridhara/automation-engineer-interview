@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Senior Test Automation Engineer live coding interview">
+  <title>Senior Test Automation Engineer | Live Interview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <nav class="nav shell" aria-label="Primary navigation">
+      <a class="brand" href="#top">
+        <span class="brand-mark">QA</span>
+        <span>Engineering Interview</span>
+      </a>
+      <div class="nav-actions">
+        <button class="button button-ghost" id="printButton" type="button">Print brief</button>
+        <button class="button button-light" id="themeButton" type="button" aria-label="Toggle color theme">Light mode</button>
+      </div>
+    </nav>
+
+    <div class="hero-content shell" id="top">
+      <div>
+        <p class="eyebrow">Senior-level live exercise</p>
+        <h1>Test Automation<br><span>Engineering Challenge</span></h1>
+        <p class="hero-copy">
+          Java · Selenium · REST Assured · Framework Design
+        </p>
+      </div>
+      <aside class="session-card" aria-label="Interview format">
+        <div class="session-row"><span>Experience level</span><strong>12+ years</strong></div>
+        <div class="session-row"><span>Recommended time</span><strong>90 minutes</strong></div>
+        <div class="session-row"><span>Format</span><strong>Share screen + explain</strong></div>
+        <div class="session-row"><span>Priority</span><strong>Reasoning over syntax</strong></div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="intro section">
+      <div>
+        <p class="section-label">Before you begin</p>
+        <h2>How to approach the session</h2>
+      </div>
+      <div class="intro-grid">
+        <article>
+          <span class="number">01</span>
+          <h3>Think aloud</h3>
+          <p>Explain assumptions, trade-offs, risks, and why you choose one approach over another.</p>
+        </article>
+        <article>
+          <span class="number">02</span>
+          <h3>Use your tools</h3>
+          <p>You may use an IDE and documentation. State clearly when you make an assumption.</p>
+        </article>
+        <article>
+          <span class="number">03</span>
+          <h3>Prioritize quality</h3>
+          <p>Readable, deterministic, maintainable code matters more than completing every task.</p>
+        </article>
+      </div>
+      <div class="callout">
+        <strong>Interview rule:</strong> Do not use generative AI to produce the solution. You may use standard API documentation.
+      </div>
+    </section>
+
+    <section class="workspace section" aria-labelledby="challenge-heading">
+      <div class="workspace-head">
+        <div>
+          <p class="section-label">Live challenges</p>
+          <h2 id="challenge-heading">Choose a task</h2>
+        </div>
+        <div class="timer" aria-live="polite">
+          <span id="timerDisplay">20:00</span>
+          <button class="timer-action" id="timerStart" type="button">Start</button>
+          <button class="timer-action" id="timerReset" type="button">Reset</button>
+        </div>
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="Interview challenges">
+        <button role="tab" aria-selected="true" aria-controls="task-1" id="tab-1" data-task="1">
+          <span>01</span> Java
+        </button>
+        <button role="tab" aria-selected="false" aria-controls="task-2" id="tab-2" data-task="2">
+          <span>02</span> Selenium
+        </button>
+        <button role="tab" aria-selected="false" aria-controls="task-3" id="tab-3" data-task="3">
+          <span>03</span> API
+        </button>
+        <button role="tab" aria-selected="false" aria-controls="task-4" id="tab-4" data-task="4">
+          <span>04</span> Debugging
+        </button>
+        <button role="tab" aria-selected="false" aria-controls="task-5" id="tab-5" data-task="5">
+          <span>05</span> Architecture
+        </button>
+      </div>
+
+      <article class="task active" id="task-1" role="tabpanel" aria-labelledby="tab-1">
+        <div class="task-meta">
+          <span>Live coding</span><span>20 minutes</span><span>Core Java</span>
+        </div>
+        <h3>Build a reusable polling utility</h3>
+        <p>
+          Implement the method below. It should repeatedly evaluate a condition until it returns a value
+          accepted by the caller or the timeout expires.
+        </p>
+        <pre><code>public final class PollingWait {
+
+    public static &lt;T&gt; T until(
+            Supplier&lt;T&gt; action,
+            Predicate&lt;T&gt; success,
+            Duration timeout,
+            Duration interval) {
+        // Implement
+    }
+}</code><button class="copy" type="button">Copy</button></pre>
+        <h4>Requirements</h4>
+        <ul>
+          <li>Execute the action immediately, then poll at the requested interval.</li>
+          <li>Return the successful value without an unnecessary additional wait.</li>
+          <li>Reject invalid timeout or interval values.</li>
+          <li>Preserve thread interruption correctly.</li>
+          <li>On timeout, provide useful diagnostic information without hiding the last failure.</li>
+          <li>Make the code testable without forcing unit tests to wait in real time.</li>
+        </ul>
+        <div class="follow-up">
+          <strong>Discuss:</strong> How would you unit-test timeout, success, exceptions, and interruption deterministically?
+        </div>
+      </article>
+
+      <article class="task" id="task-2" role="tabpanel" aria-labelledby="tab-2" hidden>
+        <div class="task-meta">
+          <span>Refactoring</span><span>20 minutes</span><span>Selenium</span>
+        </div>
+        <h3>Make this UI test reliable and maintainable</h3>
+        <p>Review the test, identify its risks, and refactor enough code to demonstrate your preferred design.</p>
+        <pre><code>@Test
+void customerCanBuyExtraBag() throws Exception {
+    WebDriver driver = new ChromeDriver();
+    driver.get(BASE_URL + "/booking");
+    driver.findElement(By.id("booking-code")).sendKeys("ABC123");
+    driver.findElement(By.xpath("//button[text()='Continue']")).click();
+    Thread.sleep(5000);
+    driver.findElements(By.cssSelector(".passenger-card")).get(0).click();
+    driver.findElement(By.xpath("//div[contains(text(),'Add baggage')]")).click();
+    Thread.sleep(3000);
+    driver.findElement(By.cssSelector("input[value='23kg']")).click();
+    driver.findElement(By.id("confirm")).click();
+    assertTrue(driver.getPageSource().contains("Baggage added"));
+    driver.quit();
+}</code><button class="copy" type="button">Copy</button></pre>
+        <h4>Your task</h4>
+        <ul>
+          <li>Explain the reliability, readability, lifecycle, and diagnostic problems.</li>
+          <li>Refactor selectors, synchronization, browser cleanup, and assertions.</li>
+          <li>Show how page/component objects should expose business behavior without becoming wrappers for every element.</li>
+          <li>Explain how you would handle asynchronous updates, localization, multiple passengers, and test data.</li>
+        </ul>
+        <div class="follow-up">
+          <strong>Discuss:</strong> When would you avoid a Page Object, and what evidence would you capture on failure?
+        </div>
+      </article>
+
+      <article class="task" id="task-3" role="tabpanel" aria-labelledby="tab-3" hidden>
+        <div class="task-meta">
+          <span>Live coding</span><span>20 minutes</span><span>REST Assured</span>
+        </div>
+        <h3>Test an idempotent ancillary-order API</h3>
+        <p>Design and code tests for the following endpoint:</p>
+        <pre><code>POST /v1/bookings/{bookingId}/ancillaries
+Headers:
+  Idempotency-Key: &lt;unique-key&gt;
+  Authorization: Bearer &lt;token&gt;
+
+Request:
+{
+  "passengerId": "P1",
+  "type": "BAGGAGE",
+  "option": "23KG"
+}
+
+Success: 201 Created
+Duplicate key + identical body: 200 OK, same orderId
+Duplicate key + different body: 409 Conflict</code><button class="copy" type="button">Copy</button></pre>
+        <h4>Your task</h4>
+        <ul>
+          <li>Implement the three core scenarios using REST Assured and clear domain assertions.</li>
+          <li>Keep request construction, authentication, and response models maintainable.</li>
+          <li>Validate meaningful headers, schema/domain fields, and side effects—not only status codes.</li>
+          <li>Explain isolation, cleanup, parallel execution, observability, and eventual consistency.</li>
+        </ul>
+        <div class="follow-up">
+          <strong>Discuss:</strong> Where should contract tests end and end-to-end tests begin?
+        </div>
+      </article>
+
+      <article class="task" id="task-4" role="tabpanel" aria-labelledby="tab-4" hidden>
+        <div class="task-meta">
+          <span>Diagnosis</span><span>15 minutes</span><span>CI reliability</span>
+        </div>
+        <h3>Investigate a flaky parallel test</h3>
+        <p>The test passes locally but fails about 8% of the time when the CI suite runs eight tests in parallel.</p>
+        <pre><code>public class SearchTests {
+    private static WebDriver driver;
+    private static String bookingId;
+
+    @BeforeAll
+    static void setup() {
+        driver = DriverFactory.create();
+        bookingId = TestData.createBooking();
+    }
+
+    @Test
+    void searchShowsPassenger() {
+        driver.get(url("/search"));
+        searchFor(bookingId);
+        wait.until(visibilityOfElementLocated(By.cssSelector(".result")));
+        assertEquals("MURALI", driver.findElement(By.cssSelector(".name")).getText());
+    }
+
+    @AfterAll
+    static void cleanup() {
+        TestData.deleteBooking(bookingId);
+        driver.quit();
+    }
+}</code><button class="copy" type="button">Copy</button></pre>
+        <h4>Explain your investigation</h4>
+        <ul>
+          <li>Rank likely causes rather than changing several things at once.</li>
+          <li>Describe the evidence and telemetry you need to prove each hypothesis.</li>
+          <li>Propose the smallest safe fix and a longer-term prevention strategy.</li>
+          <li>Explain retry policy, quarantine criteria, and how flakiness should be measured.</li>
+        </ul>
+        <div class="follow-up">
+          <strong>Constraint:</strong> “Add a retry” is not an acceptable root-cause fix.
+        </div>
+      </article>
+
+      <article class="task" id="task-5" role="tabpanel" aria-labelledby="tab-5" hidden>
+        <div class="task-meta">
+          <span>System design</span><span>15 minutes</span><span>Whiteboard</span>
+        </div>
+        <h3>Design automation for a multi-airline ancillary platform</h3>
+        <p>
+          A platform serves four airlines, web and mobile channels, 12 markets, multiple payment methods,
+          and three environments. Teams release independently several times per week.
+        </p>
+        <h4>Design a strategy that covers</h4>
+        <ul>
+          <li>Test layers and ownership across developers, QA, and platform teams.</li>
+          <li>Repository/framework boundaries and reusable domain abstractions.</li>
+          <li>Data creation, environment configuration, secrets, and parallel execution.</li>
+          <li>PR, deployment, scheduled, and release-gate pipelines.</li>
+          <li>Selection by risk, changed component, airline, market, and channel.</li>
+          <li>Reporting, traceability, observability, flaky-test control, and maintenance.</li>
+        </ul>
+        <div class="follow-up">
+          <strong>Trade-off:</strong> You may run only 10 minutes of automation on each pull request. Explain what runs and why.
+        </div>
+      </article>
+
+      <label class="complete">
+        <input type="checkbox" id="taskComplete">
+        <span>Mark this task discussed</span>
+      </label>
+    </section>
+
+    <section class="section closing">
+      <p class="section-label">Closing discussion</p>
+      <h2>Engineering leadership questions</h2>
+      <div class="question-grid">
+        <article><span>01</span><p>Describe a test suite you deliberately reduced or deleted. What evidence supported the decision?</p></article>
+        <article><span>02</span><p>How do you influence developers and product owners when quality risks are accepted too casually?</p></article>
+        <article><span>03</span><p>Tell us about a production escape that changed your automation or observability strategy.</p></article>
+        <article><span>04</span><p>Which automation metrics create harmful incentives, and what would you measure instead?</p></article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">
+      <p>Senior Test Automation Engineer · Live Technical Interview</p>
+      <p>Focus on engineering judgment, not memorized syntax.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -2,6 +2,20 @@ const tabs = [...document.querySelectorAll('[role="tab"]')];
 const tasks = [...document.querySelectorAll('[role="tabpanel"]')];
 const complete = document.querySelector('#taskComplete');
 const taskState = JSON.parse(localStorage.getItem('interview-progress') || '{}');
+const answerBox = document.querySelector('#candidateAnswer');
+const saveStatus = document.querySelector('#saveStatus');
+const answers = JSON.parse(localStorage.getItem('interview-answers') || '{}');
+
+function selectedTask() {
+  return document.querySelector('[role="tab"][aria-selected="true"]')?.dataset.task || '1';
+}
+
+function loadAnswer(number) {
+  answerBox.value = answers[number] || '';
+  saveStatus.textContent = answers[number]
+    ? 'Saved automatically in this browser'
+    : 'Start typing — your answer will be saved automatically';
+}
 
 function selectTask(number) {
   tabs.forEach((tab) => {
@@ -17,6 +31,7 @@ function selectTask(number) {
   });
 
   complete.checked = Boolean(taskState[number]);
+  loadAnswer(number);
   window.location.hash = `task-${number}`;
 }
 
@@ -32,9 +47,38 @@ tabs.forEach((tab, index) => {
 });
 
 complete.addEventListener('change', () => {
-  const selected = document.querySelector('[role="tab"][aria-selected="true"]').dataset.task;
+  const selected = selectedTask();
   taskState[selected] = complete.checked;
   localStorage.setItem('interview-progress', JSON.stringify(taskState));
+});
+
+let saveMessageTimer;
+answerBox.addEventListener('input', () => {
+  answers[selectedTask()] = answerBox.value;
+  localStorage.setItem('interview-answers', JSON.stringify(answers));
+  saveStatus.textContent = 'Saved';
+  clearTimeout(saveMessageTimer);
+  saveMessageTimer = setTimeout(() => {
+    saveStatus.textContent = 'Saved automatically in this browser';
+  }, 1200);
+});
+
+answerBox.addEventListener('keydown', (event) => {
+  if (event.key !== 'Tab') return;
+  event.preventDefault();
+  const start = answerBox.selectionStart;
+  const end = answerBox.selectionEnd;
+  answerBox.setRangeText('    ', start, end, 'end');
+  answerBox.dispatchEvent(new Event('input'));
+});
+
+document.querySelector('#clearAnswer').addEventListener('click', () => {
+  if (!answerBox.value || !window.confirm('Clear the answer for this question?')) return;
+  answerBox.value = '';
+  delete answers[selectedTask()];
+  localStorage.setItem('interview-answers', JSON.stringify(answers));
+  saveStatus.textContent = 'Answer cleared';
+  answerBox.focus();
 });
 
 document.querySelectorAll('.copy').forEach((button) => {

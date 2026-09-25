@@ -60,6 +60,8 @@
         <button role="tab" aria-selected="false" aria-controls="task-6" id="tab-6" data-task="6"><span>06</span> Design</button>
       </div>
 
+      <div class="challenge-layout">
+      <div class="question-pane">
       <article class="task active" id="task-1" role="tabpanel" aria-labelledby="tab-1">
         <div class="task-meta"><span>5 minutes</span><span>Java collections</span></div>
         <h3>Find and fix the runtime failure</h3>
@@ -186,6 +188,25 @@ Same key and different body:           409</code><button class="copy" type="butt
         <input type="checkbox" id="taskComplete">
         <span>Mark this question discussed</span>
       </label>
+      </div>
+
+      <aside class="answer-pane" aria-labelledby="answer-heading">
+        <div class="answer-head">
+          <div>
+            <p class="section-label">Candidate workspace</p>
+            <h3 id="answer-heading">Your answer</h3>
+          </div>
+          <button class="clear-answer" id="clearAnswer" type="button">Clear</button>
+        </div>
+        <label class="sr-only" for="candidateAnswer">Write your answer for the selected question</label>
+        <textarea
+          id="candidateAnswer"
+          spellcheck="false"
+          placeholder="Write code, assumptions, test cases, or explanation here…"
+        ></textarea>
+        <p class="save-status" id="saveStatus" aria-live="polite">Saved automatically in this browser</p>
+      </aside>
+      </div>
     </section>
   </main>
 
